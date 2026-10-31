@@ -1,0 +1,6 @@
+{
+  "name": "VELORA — Contemporary Fashion & Essentials",
+  "description": "A minimalist, editorial e-commerce storefront demonstration for VELORA featuring considered contemporary apparel, interactive catalog filtering, and a persistent shopping bag.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

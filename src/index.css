@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --velora-ivory: #f8f6f1;
+    --velora-paper: #f2efe8;
+    --velora-beige: #e7e1d6;
+    --velora-taupe: #8d8377;
+    --velora-charcoal: #2c2b29;
+    --velora-black: #141312;
+    --velora-border: rgba(20, 19, 18, 0.1);
+    --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--velora-ivory);
+    color: var(--velora-black);
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--velora-ivory);
+    color: var(--velora-black);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-editorial {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    text-wrap: balance;
+  }
+
+  button,
+  a,
+  input,
+  select {
+    font-family: inherit;
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--velora-black);
+    outline-offset: 3px;
+  }
+}
+
+/* Editorial Entrance & Micro-Interactions */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-1 {
+  animation: heroFadeUp 0.8s var(--ease-editorial) 0.05s both;
+}
+
+.animate-hero-2 {
+  animation: heroFadeUp 0.8s var(--ease-editorial) 0.18s both;
+}
+
+.animate-hero-3 {
+  animation: heroFadeUp 0.8s var(--ease-editorial) 0.3s both;
+}
+
+/* Header State Transitions */
+.site-header {
+  transition: background-color 0.25s var(--ease-editorial),
+    border-color 0.25s var(--ease-editorial),
+    color 0.25s var(--ease-editorial);
+}
+
+.site-header[data-solid="false"] {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(248, 246, 241, 0.16);
+  color: #f8f6f1;
+}
+
+.site-header[data-solid="true"] {
+  background-color: rgba(248, 246, 241, 0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(20, 19, 18, 0.1);
+  color: #141312;
+}
+
+/* Editorial Nav Underline */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s var(--ease-editorial);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Product Card & Editorial Image Zoom */
+.editorial-media img {
+  transition: transform 0.55s var(--ease-editorial), opacity 0.25s ease;
+}
+
+.editorial-media:hover img {
+  transform: scale(1.028);
+}
+
+.product-card {
+  transition: transform 0.2s var(--ease-editorial);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Swatch Color Dots (Functional Variant Controls) */
+.swatch- ivory,
+.swatch-fill[data-color="Warm Ivory"] {
+  background-color: #f3efe6;
+}
+.swatch-fill[data-color="Soft Beige"] {
+  background-color: #d9cfc1;
+}
+.swatch-fill[data-color="Muted Taupe"] {
+  background-color: #96897b;
+}
+.swatch-fill[data-color="Charcoal"] {
+  background-color: #3a3937;
+}
+.swatch-fill[data-color="Black"] {
+  background-color: #161514;
+}
+
+/* Drawer & Modal Backdrop Transitions */
+.drawer-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s var(--ease-editorial);
+}
+
+.drawer-backdrop[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-panel {
+  transform: translateX(100%);
+  transition: transform 0.28s var(--ease-editorial);
+}
+
+.drawer-panel[data-open="true"] {
+  transform: translateX(0);
+}
+
+.drawer-panel-left {
+  transform: translateX(-100%);
+  transition: transform 0.28s var(--ease-editorial);
+}
+
+.drawer-panel-left[data-open="true"] {
+  transform: translateX(0);
+}
+
+.modal-panel {
+  opacity: 0;
+  transform: translateY(10px) scale(0.99);
+  pointer-events: none;
+  transition: opacity 0.2s var(--ease-editorial), transform 0.2s var(--ease-editorial);
+}
+
+.modal-panel[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Size validation prompt highlight */
+@keyframes subtleShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+.size-error-shake {
+  animation: subtleShake 0.22s ease-in-out 2;
+}
+
+/* Semantic shipping progress bar without inline styles */
+.velora-progress {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+  border: none;
+  background-color: #e2dcd1;
+  overflow: hidden;
+}
+
+.velora-progress::-webkit-progress-bar {
+  background-color: #e2dcd1;
+}
+
+.velora-progress::-webkit-progress-value {
+  background-color: #141312;
+  transition: width 0.3s var(--ease-editorial);
+}
+
+.velora-progress::-moz-progress-bar {
+  background-color: #141312;
+}
+
+/* PDP Secondary Textile Crop Framing */
+.pdp-media-detail img {
+  transform: scale(1.45);
+  transform-origin: center 38%;
+}
+
+/* Tabular figures for pricing & quantities */
+.tabular-price {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
