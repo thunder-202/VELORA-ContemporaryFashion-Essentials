@@ -1,3 +1,4 @@
+import './index.css';
 import {
   EDITORIAL_MEDIA,
   FEATURED_COLLECTIONS,
@@ -118,14 +119,23 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
-function renderResilientImage({ src, alt, imgClass = 'w-full h-full object-cover', label = 'VELORA' }) {
+function renderResilientImage({
+  src,
+  alt,
+  imgClass = 'w-full h-full object-cover',
+  label = 'VELORA',
+  eager = false
+}) {
+  const loadingAttrs = eager
+    ? 'loading="eager" fetchpriority="high"'
+    : 'loading="lazy" decoding="async"';
   return `
     <div class="relative w-full h-full overflow-hidden bg-[#E7E1D6]">
       <img
         src="${escapeHtml(src)}"
         alt="${escapeHtml(alt)}"
         referrerpolicy="no-referrer"
-        loading="lazy"
+        ${loadingAttrs}
         class="${imgClass}"
         data-resilient-img
       />
@@ -185,7 +195,8 @@ function mountEditorialMedia() {
       src: EDITORIAL_MEDIA.hero.src,
       alt: EDITORIAL_MEDIA.hero.alt,
       imgClass: 'w-full h-full object-cover object-center',
-      label: 'Autumn / Winter Campaign'
+      label: 'Autumn / Winter Campaign',
+      eager: true
     });
   }
 
